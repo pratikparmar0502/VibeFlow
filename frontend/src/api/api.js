@@ -4,5 +4,8 @@ const API = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
-export const registerUser = (userData) => API.post("/auth/register", userData);
-export const loginUser = (userData) => API.post("/auth/login", userData);
+export const authServices = {
+  login: (data) => API.post("/users/login", data),
+  register: (data) => API.post("/users/register", data),
+  getLoginUser: () => API.get("/users/getUserProfile"),
+};

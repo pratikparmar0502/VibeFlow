@@ -17,7 +17,7 @@ var app = express();
 
 app.use(
   cors({
-    origin: "https://vibe-flow-khol.vercel.app",
+    origin: ["https://vibe-flow-khol.vercel.app", "http://localhost:5173"],
     credentials: true,
   }),
 );

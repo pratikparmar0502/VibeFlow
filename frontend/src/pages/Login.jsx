@@ -1,7 +1,7 @@
 import { Button, Container } from "@mui/material";
 import { Formik, Form, Field } from "formik";
 import { useEffect } from "react";
-import { API } from "../api/api";
+import { authServices } from "../api/api";
 
 const Login = () => {
   const initialValues = {
@@ -11,15 +11,21 @@ const Login = () => {
 
   const handleSubmit = (values) => {
     console.log(values);
+    try {
+      const res = authServices.login(values);
+      console.log("Login response: ", res.data);
+    } catch (error) {
+      console.error("Login error: ", error);
+    }
   };
 
   const fetchData = async () => {
     try {
-      const res = await API.get("/auth/login");
-      console.log(res.data);
+      const res = await authServices.getLoginUser();
+      console.log("Fetched data: ", res.data);
       // setList(res.data);
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching posts:", error);
     }
   };
 
