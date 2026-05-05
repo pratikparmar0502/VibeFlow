@@ -1,6 +1,5 @@
 import { Button, Container } from "@mui/material";
 import { Formik, Form, Field } from "formik";
-import { useEffect } from "react";
 import { authServices } from "../api/api";
 
 const Login = () => {
@@ -9,29 +8,20 @@ const Login = () => {
     password: "",
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     console.log(values);
     try {
-      const res = authServices.login(values);
+      const res = await authServices.login(values);
       console.log("Login response: ", res.data);
+
+      if (res.data.token) {
+        localStorage.setItem("token", res.data.token);
+        console.log("Token successfully stored in localStorage!");
+      }
     } catch (error) {
       console.error("Login error: ", error);
     }
   };
-
-  const fetchData = async () => {
-    try {
-      const res = await authServices.getLoginUser();
-      console.log("Fetched data: ", res.data);
-      // setList(res.data);
-    } catch (error) {
-      console.error("Error fetching posts:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <>

@@ -7,5 +7,4 @@ const API = axios.create({
 export const authServices = {
   login: (data) => API.post("/users/login", data),
   register: (data) => API.post("/users/register", data),
-  getLoginUser: () => API.get("/users/getUserProfile"),
 };

@@ -1,6 +1,5 @@
 import { Button, Container } from "@mui/material";
 import { Formik, Form, Field } from "formik";
-import { useEffect } from "react";
 import { authServices } from "../api/api";
 
 const Signup = () => {
@@ -10,29 +9,15 @@ const Signup = () => {
     password: "",
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     console.log(values);
     try {
-      const res = authServices.register(values);
+      const res = await authServices.register(values);
       console.log("Signup response: ", res.data);
     } catch (error) {
       console.error("Signup error: ", error);
     }
   };
-
-  const fetchData = async () => {
-    try {
-      const res = await authServices.getLoginUser();
-      console.log("Fetched data: ", res.data);
-      // setList(res.data);
-    } catch (error) {
-      console.error("Error fetching posts:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <>
@@ -46,7 +31,7 @@ const Signup = () => {
             <Field name="name" type="name" placeholder="Name" />
             <Field name="email" type="email" placeholder="Email" />
             <Field name="password" type="password" placeholder="Password" />
-            <Button type="submit">Login</Button>
+            <Button type="submit">Sign Up</Button>
           </Form>
         </Formik>
       </Container>
