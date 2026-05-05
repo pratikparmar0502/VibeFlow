@@ -1,5 +1,5 @@
+const cors = require("cors");
 const dotenv = require("dotenv").config();
-const cors = require(cors);
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -17,7 +17,7 @@ var app = express();
 
 app.use(
   cors({
-    origin: "https://your-project-name.vercel.app",
+    origin: "https://vibe-flow-khol.vercel.app",
     credentials: true,
   }),
 );
