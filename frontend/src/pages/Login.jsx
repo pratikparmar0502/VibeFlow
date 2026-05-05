@@ -1,12 +1,10 @@
-// import Container from "@mui/material/Container";
+import { Button, Container } from "@mui/material";
 import { Formik, Form, Field } from "formik";
-// import { useState } from "react";
+import { useEffect } from "react";
+import { API } from "../api/api";
 
 const Login = () => {
-  // const [list, setList] = useState([]);
-
   const initialValues = {
-    name: "",
     email: "",
     password: "",
   };
@@ -15,20 +13,35 @@ const Login = () => {
     console.log(values);
   };
 
+  const fetchData = async () => {
+    try {
+      const res = await API.get("/auth/login");
+      console.log(res.data);
+      // setList(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <>
-      <Formik
-        onSubmit={handleSubmit}
-        initialValues={initialValues}
-        enableReinitialize={true}
-      >
-        <Form>
-          <Field name="name" type="name" placeholder="Name" />
-          <Field name="email" type="email" placeholder="Email" />
-          <Field name="password" type="password" placeholder="Password" />
-          <button type="submit">Login</button>
-        </Form>
-      </Formik>
+      <Container maxWidth="sm" sx={{ marginTop: "100px" }}>
+        <Formik
+          onSubmit={handleSubmit}
+          initialValues={initialValues}
+          enableReinitialize={true}
+        >
+          <Form>
+            <Field name="email" type="email" placeholder="Email" />
+            <Field name="password" type="password" placeholder="Password" />
+            <Button type="submit">Login</Button>
+          </Form>
+        </Formik>
+      </Container>
     </>
   );
 };
