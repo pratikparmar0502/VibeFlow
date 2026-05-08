@@ -1,9 +1,7 @@
 import {
   Box,
   Button,
-  Checkbox,
   Container,
-  FormControlLabel,
   IconButton,
   InputAdornment,
   Link as MuiLink,
@@ -36,7 +34,7 @@ const Login = () => {
     try {
       const res = await authServices.login(values);
       login(res.data.data, res.data.token);
-      toast.success("Welcome back!");
+      toast.success("Welcome!");
       navigate("/");
     } catch (error) {
       toast.error(error.response?.data?.message || "Invalid credentials");
@@ -134,13 +132,6 @@ const Login = () => {
                     }}
                     sx={{ "& .MuiOutlinedInput-root": { borderRadius: 3 } }}
                   />
-
-                  <FormControlLabel
-                    control={<Checkbox name="rememberMe" defaultChecked />}
-                    label="Remember me"
-                    sx={{ color: "text.secondary" }}
-                  />
-
                   <Button
                     type="submit"
                     variant="contained"

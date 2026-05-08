@@ -176,8 +176,8 @@ const Navbar = () => {
                 </Typography>
                 <Button
                   onClick={logout}
-                  variant="outlined"
-                  color="error"
+                  variant="contained"
+                  color="primary"
                   sx={{ borderRadius: "10px", textTransform: "none" }}
                 >
                   Logout
