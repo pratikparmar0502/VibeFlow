@@ -48,6 +48,7 @@ const Navbar = () => {
         color: "text.primary",
         borderBottom: "1px solid rgba(0, 0, 0, 0.05)",
         boxShadow: "none",
+        py: "7px",
       }}
     >
       <Toolbar

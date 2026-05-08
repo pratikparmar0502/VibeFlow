@@ -21,8 +21,8 @@ import { AuthContext } from "../context/AuthContext";
 import { useContext, useState } from "react";
 
 const loginSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required"),
-  password: Yup.string().required("Required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string().required("Password is required"),
 });
 
 const Login = () => {
@@ -81,7 +81,7 @@ const Login = () => {
           </Box>
 
           <Formik
-            initialValues={{ email: "", password: "", rememberMe: true }}
+            initialValues={{ email: "", password: "" }}
             validationSchema={loginSchema}
             onSubmit={handleSubmit}
           >
@@ -111,7 +111,7 @@ const Login = () => {
                     label="Password"
                     type={showPassword ? "text" : "password"}
                     fullWidth
-                    error={touched.password && Boolean(errors.password)}
+                    error={touched.password && !!errors.password}
                     helperText={touched.password && errors.password}
                     InputProps={{
                       startAdornment: (
@@ -122,7 +122,7 @@ const Login = () => {
                       endAdornment: (
                         <InputAdornment position="end">
                           <IconButton
-                            onClick={() => setShowPassword((v) => !v)}
+                            onClick={() => setShowPassword(!showPassword)}
                             edge="end"
                           >
                             {showPassword ? <VisibilityOff /> : <Visibility />}
@@ -144,6 +144,12 @@ const Login = () => {
                       textTransform: "none",
                       background:
                         "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)",
+                      "&.Mui-disabled": {
+                        color: "rgba(255, 255, 255, 0.7)", // Light white when disabled
+                        background:
+                          "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)", // Keep the gradient
+                        opacity: 0.8,
+                      },
                     }}
                   >
                     {isSubmitting ? "Logging in..." : "Log In"}
@@ -152,7 +158,12 @@ const Login = () => {
                   <Divider>or</Divider>
 
                   <Box
-                    sx={{ display: "flex", justifyContent: "center", gap: 1 }}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: 1,
+                    }}
                   >
                     <Typography variant="body2" color="text.secondary">
                       Don’t have an account?

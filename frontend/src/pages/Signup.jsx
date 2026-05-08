@@ -170,6 +170,12 @@ const Signup = () => {
                       textTransform: "none",
                       background:
                         "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)",
+                      "&.Mui-disabled": {
+                        color: "rgba(255, 255, 255, 0.7)", // Light white when disabled
+                        background:
+                          "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)", // Keep the gradient
+                        opacity: 0.8,
+                      },
                     }}
                   >
                     {isSubmitting ? "Creating account..." : "Sign Up"}
@@ -178,7 +184,12 @@ const Signup = () => {
                   <Divider>or</Divider>
 
                   <Box
-                    sx={{ display: "flex", justifyContent: "center", gap: 1 }}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: 1,
+                    }}
                   >
                     <Typography variant="body2" color="text.secondary">
                       Already have an account?
