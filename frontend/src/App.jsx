@@ -4,11 +4,13 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Layout from "./components/Layout";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <>
       <BrowserRouter>
+        <ToastContainer position="top-right" autoClose={3000} />
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />

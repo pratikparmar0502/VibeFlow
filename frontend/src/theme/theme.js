@@ -4,7 +4,7 @@ const theme = createTheme({
   palette: {
     // Left-side sidebar and accent colors
     primary: {
-      main: "#1976d2", // A vibrant, social blue
+      main: "#4f46e5", // A vibrant, social blue
       light: "#e3f2fd", // Very light background blue
     },
     // Used for active buttons/accent details

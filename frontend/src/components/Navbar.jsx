@@ -23,11 +23,14 @@ import {
   Menu,
   Psychology,
 } from "@mui/icons-material";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const location = useLocation();
+
+  const { user, logout } = useContext(AuthContext);
 
   const menuItems = [
     { label: "Home", icon: <Home />, path: "/" },
@@ -140,29 +143,47 @@ const Navbar = () => {
           }}
         >
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1.5 }}>
-            <Button
-              component={Link}
-              to="/login"
-              variant="outlined"
-              sx={{
-                fontWeight: 600,
-                borderRadius: "10px",
-              }}
-            >
-              Login
-            </Button>
-            <Button
-              component={Link}
-              to="/signup"
-              variant="contained"
-              sx={{
-                borderRadius: "10px",
-                textTransform: "none",
-                boxShadow: "none",
-              }}
-            >
-              Sign Up
-            </Button>
+            {!user ? (
+              <>
+                <Button
+                  component={Link}
+                  to="/login"
+                  variant="outlined"
+                  sx={{
+                    fontWeight: 600,
+                    borderRadius: "10px",
+                  }}
+                >
+                  Login
+                </Button>
+                <Button
+                  component={Link}
+                  to="/signup"
+                  variant="contained"
+                  sx={{
+                    borderRadius: "10px",
+                    textTransform: "none",
+                    boxShadow: "none",
+                  }}
+                >
+                  Sign Up
+                </Button>
+              </>
+            ) : (
+              <>
+                <Typography sx={{ alignSelf: "center", fontWeight: 600 }}>
+                  Hi, {user.name}
+                </Typography>
+                <Button
+                  onClick={logout}
+                  variant="outlined"
+                  color="error"
+                  sx={{ borderRadius: "10px", textTransform: "none" }}
+                >
+                  Logout
+                </Button>
+              </>
+            )}
           </Box>
 
           <IconButton
@@ -218,24 +239,40 @@ const Navbar = () => {
           </List>
           <Divider sx={{ my: 1 }} />
           <Box sx={{ p: 2, display: "flex", flexDirection: "column", gap: 2 }}>
-            <Button
-              fullWidth
-              variant="outlined"
-              component={Link}
-              to="/login"
-              onClick={() => setIsDrawerOpen(false)}
-            >
-              Login
-            </Button>
-            <Button
-              fullWidth
-              variant="contained"
-              component={Link}
-              to="/signup"
-              onClick={() => setIsDrawerOpen(false)}
-            >
-              Sign Up
-            </Button>
+            {!user ? (
+              <>
+                <Button
+                  fullWidth
+                  variant="outlined"
+                  component={Link}
+                  to="/login"
+                  onClick={() => setIsDrawerOpen(false)}
+                >
+                  Login
+                </Button>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  component={Link}
+                  to="/signup"
+                  onClick={() => setIsDrawerOpen(false)}
+                >
+                  Sign Up
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  component={Link}
+                  to="/login"
+                  onClick={logout}
+                >
+                  Logout
+                </Button>
+              </>
+            )}
           </Box>
         </Box>
       </Drawer>
