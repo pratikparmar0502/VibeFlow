@@ -155,7 +155,7 @@ const Navbar = () => {
                     borderRadius: "10px",
                   }}
                 >
-                  Login
+                  Log In
                 </Button>
                 <Button
                   component={Link}
@@ -249,7 +249,7 @@ const Navbar = () => {
                   to="/login"
                   onClick={() => setIsDrawerOpen(false)}
                 >
-                  Login
+                  Log In
                 </Button>
                 <Button
                   fullWidth

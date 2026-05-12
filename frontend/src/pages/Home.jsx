@@ -1,36 +1,78 @@
-import { Container } from "@mui/material";
-import { useContext, useEffect } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router";
+import { Box } from "@mui/material";
+import Sidebar from "../components/Sidebar";
+import RightSidebar from "../components/RightSidebar";
+import Feed from "../components/Feed";
 
 const Home = () => {
-  const { user, loading } = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!loading && !user) {
-      navigate("/login");
-    }
-  }, [loading, user, navigate]);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!user) {
-    return <p>Redirecting to login...</p>;
-  }
-
   return (
-    <>
-      <Container sx={{ mt: 10 }}>
-        <h1>Welcome to VibeFlow {user.name}</h1>
-        <p>
-          Your ultimate social media experience. Connect, share, and vibe with
-          friends!
-        </p>
-      </Container>
-    </>
+    <Box
+      component="main"
+      sx={{
+        height: "100vh",
+        overflow: "hidden",
+        background: "linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%)",
+      }}
+    >
+      {/* MAIN LAYOUT WRAPPER */}
+      <Box
+        sx={{
+          display: "flex",
+          height: "100vh",
+          maxWidth: "1400px",
+          mx: "auto",
+          px: { xs: 1, sm: 2, md: 3 },
+          gap: 3,
+        }}
+      >
+        {/* LEFT SIDEBAR */}
+        <Box
+          sx={{
+            display: { xs: "none", md: "block" },
+            width: 280,
+            height: "100vh",
+            overflowY: "auto",
+            position: "sticky",
+            top: 0,
+            py: 2,
+            scrollbarWidth: "none",
+            "&::-webkit-scrollbar": { display: "none" },
+          }}
+        >
+          <Sidebar />
+        </Box>
+
+        {/* FEED (CENTER) */}
+        <Box
+          sx={{
+            flex: 1,
+            maxWidth: 700,
+            width: "100%",
+            height: "100vh",
+            overflowY: "auto",
+            py: 2,
+            scrollbarWidth: "none",
+            "&::-webkit-scrollbar": { display: "none" },
+          }}
+        >
+          <Feed />
+        </Box>
+
+        {/* RIGHT SIDEBAR */}
+        <Box
+          sx={{
+            display: { xs: "none", lg: "block" },
+            width: 300,
+            height: "100vh",
+            overflowY: "auto",
+            py: 2,
+            scrollbarWidth: "none",
+            "&::-webkit-scrollbar": { display: "none" },
+          }}
+        >
+          <RightSidebar />
+        </Box>
+      </Box>
+    </Box>
   );
 };
 
