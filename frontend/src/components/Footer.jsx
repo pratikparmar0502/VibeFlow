@@ -32,7 +32,7 @@ const Footer = () => {
           <Box component="span" sx={{ fontWeight: 800, color: "primary.main" }}>
             VibeFlow
           </Box>
-          • Built in Surat for the developer community
+          • All Right Reserved.
         </Typography>
       </Container>
     </Box>
