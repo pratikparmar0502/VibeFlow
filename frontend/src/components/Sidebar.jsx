@@ -54,7 +54,7 @@ const Sidebar = ({ isMini = false, onMenuClick }) => {
                   px: isMini ? 0 : 2,
                   justifyContent: isMini ? "center" : "flex-start",
                   borderRadius: 3,
-                  color: isActive ? "primary.main" : "text.secondary",
+                  color: isActive ? "primary.main" : "#222",
                   bgcolor: isActive ? "rgba(79, 70, 229, 0.08)" : "transparent",
                 }}
               >
