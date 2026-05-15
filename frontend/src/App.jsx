@@ -12,6 +12,7 @@ import Bookmarks from "./pages/Bookmarks";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import Trending from "./pages/Trending";
+import Communities from "./pages/Communities";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/messages" element={<Messages />} />
             <Route path="/bookmarks" element={<Bookmarks />} />
+            <Route path="/communities" element={<Communities />} />
             <Route path="/trending" element={<Trending />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<Settings />} />

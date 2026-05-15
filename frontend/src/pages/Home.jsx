@@ -1,58 +1,34 @@
-import { Box, Container, useMediaQuery, useTheme } from "@mui/material";
-import Sidebar from "../components/Sidebar";
-import RightSidebar from "../components/RightSidebar";
+import { Box } from "@mui/material";
 import Feed from "../components/Feed";
+import RightSidebar from "../components/RightSidebar";
 
 const Home = () => {
-  const theme = useTheme();
-
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        background: "linear-gradient(180deg, #f5f3ff 0%, #f9fafb 100%)",
-      }}
-    >
-      <Container maxWidth="xl" sx={{ maxWidth: "1450px !important" }}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            gap: { md: 2, lg: 4 },
-            pt: { xs: 2, md: 3 },
-          }}
-        >
-          {/* LEFT SIDEBAR: Adaptive Width */}
-          <Box
-            sx={{
-              display: { xs: "none", md: "block" },
-              width: { md: 80, lg: 280 }, // Mini on Tablet, Full on Desktop
-              position: "sticky",
-              top: 24,
-              transition: "width 0.3s ease", // Smooth transition
-            }}
-          >
-            <Sidebar isMini={!useMediaQuery(theme.breakpoints.up("lg"))} />
-          </Box>
+    <Box sx={{ display: "flex", gap: 3 }}>
+      {/* FEED: Takes up the left/center space */}
+      <Box
+        sx={{
+          flexGrow: 1,
+          maxWidth: { lg: "700px", xl: "800px" }, // Limits feed width for readability
+          mx: "auto", // Centers the feed in its available space
+        }}
+      >
+        <Feed />
+      </Box>
 
-          {/* FEED */}
-          <Box sx={{ flex: 1, maxWidth: 700, minWidth: 0 }}>
-            <Feed />
-          </Box>
-
-          {/* RIGHT SIDEBAR */}
-          <Box
-            sx={{
-              display: { xs: "none", lg: "block" },
-              width: 320,
-              position: "sticky",
-              top: 24,
-            }}
-          >
-            <RightSidebar />
-          </Box>
-        </Box>
-      </Container>
+      {/* RIGHT SIDEBAR: Fills the right space on Desktop */}
+      <Box
+        sx={{
+          display: { xs: "none", lg: "block" },
+          width: "350px", // Fixed width to match the left sidebar feel
+          flexShrink: 0,
+          position: "sticky",
+          top: "100px",
+          height: "fit-content",
+        }}
+      >
+        <RightSidebar />
+      </Box>
     </Box>
   );
 };
